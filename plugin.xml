@@ -1,0 +1,104 @@
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="cordova-plugin-blancco"
+    version="1.0.0">
+
+    <name>BlanccoSDKPlugin</name>
+    <description>Cordova plugin for Blancco SDK</description>
+    <license>MIT</license>
+    <keywords>cordova</keywords>
+
+    <js-module src="www/BlanccoSDK.js" name="BlanccoSDK">
+        <merges target="cordova.plugins.blanccosdk" />
+    </js-module>
+
+    <engines>
+        <engine name="cordova" version=">=11.0.0" />
+        <engine name="cordova-android" version=">=11.0.0" />
+        <engine name="cordova-ios" version=">=6.2.0" />
+    </engines>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="BlanccoSDKPlugin">
+                <param name="android-package"
+                    value="cl.entel.plugins.BlanccoSDKPlugin" />
+                <param name="onload" value="false" />
+            </feature>
+        </config-file>
+
+        <config-file target="config.xml" parent="/*">
+            <preference name="AndroidXEnabled" value="true" />
+            <preference name="enableJetifier" value="true" />
+            <preference name="android.enableJetifier" value="false" />
+        </config-file>
+
+        <edit-config file="AndroidManifest.xml"
+            target="/manifest/application/activity"
+            mode="merge"
+            xmlns:android="http://schemas.android.com/apk/res/android">
+            <activity android:exported="true" />
+        </edit-config>
+        <edit-config file="AndroidManifest.xml"
+            target="/manifest"
+            mode="merge">
+            <manifest xmlns:tools="http://schemas.android.com/tools" />
+        </edit-config>
+        <edit-config file="AndroidManifest.xml"
+            target="/manifest/application"
+            mode="merge"
+            xmlns:tools="http://schemas.android.com/tools">
+            <application android:allowBackup="true" tools:replace="android:allowBackup" />
+        </edit-config>
+
+        <!-- <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.INTERNET" />
+        </config-file> -->
+
+        <dependency id="cordova-support-android-plugin" version="~2.0.4" />
+
+
+        <framework src="com.google.code.gson:gson:2.8.5" />
+        <framework src="com.mikepenz.iconics:library:0.9.1" />
+
+        <framework src="src/android/BlanccoSDKPlugin.gradle" custom="true" type="gradleReference" />
+        <resource-file src="libs/core.aar" target="libs/core.aar" />
+        <resource-file src="libs/hc.aar" target="libs/hc.aar" />
+
+        <framework src="com.google.android.material:material:1.4.0" />
+        <framework src="androidx.appcompat:appcompat:1.0.2" />
+        <framework src="androidx.constraintlayout:constraintlayout:1.1.3" />
+        <framework src="com.google.android.material:material:1.0.0" />
+        <framework src="com.airbnb.android:lottie:3.6.0" />
+        <framework src="androidx.multidex:multidex:2.0.0" />
+        <framework src="com.jakewharton.timber:timber:4.7.1" />
+        <framework src="com.squareup.retrofit2:retrofit:2.5.0" />
+        <framework src="com.squareup.retrofit2:converter-gson:2.5.0" />
+        <framework src="com.squareup.okhttp3:okhttp:4.9.1" />
+        <framework src="com.squareup.okhttp3:logging-interceptor:4.9.1" />
+        <framework src="android.arch.work:work-runtime:1.0.0" />
+        <framework src="android.arch.work:work-testing:1.0.0" />
+        <framework src="com.google.firebase:firebase-dynamic-links:19.0.0" />
+        <framework src="com.google.android.gms:play-services-gcm:16.1.0" />
+        <framework src="com.google.android.gms:play-services-location:16.0.0" />
+        <framework src="com.google.android.gms:play-services-auth:16.0.1" />
+        <framework src="com.google.android.gms:play-services-vision:17.0.2" />
+        <framework src="com.google.android.gms:play-services-maps:18.2.0" />
+        <framework src="com.google.android.gms:play-services-auth-api-phone:16.0.0" />
+        <framework src="com.microsoft.appcenter:appcenter-analytics:1.11.4" />
+        <framework src="com.microsoft.appcenter:appcenter-crashes:1.11.4" />
+        <framework src="com.journeyapps:zxing-android-embedded:3.6.0" />
+        <framework src="com.intuit.sdp:sdp-android:1.1.0" />
+        <framework src="com.intuit.ssp:ssp-android:1.1.0" />
+        <framework src="com.airbnb.android:paris:2.0.0" />
+        <framework src="junit:junit:4.12" />
+        <framework src="androidx.test.ext:junit:1.1.1" />
+        <framework src="androidx.test.espresso:espresso-core:3.5.1" />
+        <framework src="androidx.work:work-runtime:2.7.1" />
+
+
+        <source-file src="src/android/BlanccoSDKPlugin.java"
+            target-dir="src/cl/entel/plugins/" />
+    </platform>
+
+</plugin>

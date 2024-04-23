@@ -1,0 +1,14 @@
+{
+  "name": "cordova-plugin-blancco",
+  "version": "1.0.0",
+  "description": "Cordova plugin for Blancco SDK",
+  "cordova": {
+    "id": "cordova-plugin-blancco",
+    "platforms": [
+      "ios",
+      "android"
+    ]
+  },
+  "author": "@Casapia",
+  "license": "MIT"
+}

@@ -1,0 +1,23 @@
+repositories{    
+  maven { 
+    url "https://maven.google.com" 
+  } 
+  jcenter() 
+  google()
+  flatDir {
+    dirs 'src/main/libs'
+  }
+}
+
+dependencies {
+  // classpath 'com.android.tools.build:gradle:4.0.1'
+  implementation(name:'core', ext:'aar')
+  implementation(name:'hc', ext:'aar')
+}
+
+android {
+  packagingOptions {
+    exclude 'META-INF/DEPENDENCIES'
+    exclude 'org/commonmark/internal/util/entities.properties'
+  }
+}
