@@ -14,7 +14,14 @@
         <engine name="cordova-ios" version=">=6.2.0" />
     </engines>
 
+    <dependency id="cordova-custom-config"
+        url="https://github.com/dpa99c/cordova-custom-config" />
+
     <platform name="android">
+        <custom-preference name="android-manifest/application/activity/@android:exported" value="true" />
+        <custom-preference name="android-manifest/application/@android:allowBackup" value="true" />
+        <!-- <custom-preference name="android-manifest/application/@tools:replace" value="android:allowBackup" /> -->
+
         <js-module src="www/BlanccoSDK.js" name="BlanccoSDKPlugin">
             <merges target="cordova.plugins.blanccosdk" />
         </js-module>
@@ -29,8 +36,6 @@
 
         <config-file target="config.xml" parent="/*">
             <preference name="AndroidXEnabled" value="true" />
-            <preference name="enableJetifier" value="true" />
-            <preference name="android.enableJetifier" value="false" />
         </config-file>
 
         <config-file target="AndroidManifest.xml" parent="/*">
@@ -43,27 +48,23 @@
             <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
             <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
         </config-file>
-        <edit-config file="AndroidManifest.xml"
+        <!-- <edit-config file="AndroidManifest.xml"
             target="/manifest/application/activity"
             mode="merge"
             xmlns:android="http://schemas.android.com/apk/res/android">
             <activity android:exported="true" />
-        </edit-config>
-        <edit-config file="AndroidManifest.xml"
+        </edit-config> -->
+        <!-- <edit-config file="AndroidManifest.xml"
             target="/manifest"
             mode="merge">
             <manifest xmlns:tools="http://schemas.android.com/tools" />
-        </edit-config>
-        <edit-config file="AndroidManifest.xml"
+        </edit-config> -->
+        <!-- <edit-config file="AndroidManifest.xml"
             target="/manifest/application"
             mode="merge"
             xmlns:tools="http://schemas.android.com/tools">
             <application android:allowBackup="true" tools:replace="android:allowBackup" />
-        </edit-config>
-
-        <!-- <config-file target="AndroidManifest.xml" parent="/*">
-            <uses-permission android:name="android.permission.INTERNET" />
-        </config-file> -->
+        </edit-config> -->
 
         <dependency id="cordova-support-android-plugin" version="~2.0.4" />
 
