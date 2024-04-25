@@ -27,24 +27,20 @@ public class BlanccoSDKPlugin extends ReflectiveCordovaPlugin {
         Timber.tag(TAG).d("Starting Blancco SDK plugin");
     }
 
-    @CordovaMethod(WORKER)
+    @CordovaMethod(MAIN)
     public void activate(final CordovaArgs args, final CallbackContext callbackContext) {
         Timber.tag(TAG).d("Activating Blancco SDK");
-        cordova.getThreadPool().execute(new Runnable() {
-            public void run() {
-                try {
-                    String key = args.getString(0).trim();
-                    if (key.isEmpty()) {
-                        throw new IllegalArgumentException("API key is required");
-                    }
-                    Hub.getInstance(cordova.getContext()).activateApiKey(key);
-                    callbackContext.success();
-                } catch (Exception e) {
-                    Timber.tag(TAG).e(e, "Error activating Blancco SDK");
-                    callbackContext.error(e.getMessage());
-                }
+        try {
+            String key = args.getString(0).trim();
+            if (key.isEmpty()) {
+                throw new IllegalArgumentException("API key is required");
             }
-        });
+            Hub.getInstance(cordova.getContext()).activateApiKey(key);
+            callbackContext.success();
+        } catch (Exception e) {
+            Timber.tag(TAG).e(e, "Error activating Blancco SDK");
+            callbackContext.error(e.getMessage());
+        }
     }
 
     @CordovaMethod(WORKER)
