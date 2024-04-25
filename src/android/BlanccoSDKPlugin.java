@@ -1,8 +1,11 @@
 package cl.entel.plugins;
 
+import static by.chemerisuk.cordova.support.ExecutionThread.MAIN;
 import static by.chemerisuk.cordova.support.ExecutionThread.WORKER;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
+import android.util.Log;
 
 import com.inhancetechnology.framework.hub.Hub;
 import com.inhancetechnology.healthchecker.ui.plays.TestSequencePlay;
@@ -17,19 +20,19 @@ import java.util.List;
 
 import by.chemerisuk.cordova.support.CordovaMethod;
 import by.chemerisuk.cordova.support.ReflectiveCordovaPlugin;
-import timber.log.Timber;
 
+@SuppressLint("LogNotTimber")
 public class BlanccoSDKPlugin extends ReflectiveCordovaPlugin {
     private static final String TAG = "BlanccoSDKPlugin";
 
     @Override
     protected void pluginInitialize() {
-        Timber.tag(TAG).d("Starting Blancco SDK plugin");
+        Log.d(TAG,"Starting Blancco SDK plugin");
     }
 
     @CordovaMethod(MAIN)
     public void activate(final CordovaArgs args, final CallbackContext callbackContext) {
-        Timber.tag(TAG).d("Activating Blancco SDK");
+        Log.d(TAG, "Activating Blancco SDK");
         try {
             String key = args.getString(0).trim();
             if (key.isEmpty()) {
@@ -38,14 +41,14 @@ public class BlanccoSDKPlugin extends ReflectiveCordovaPlugin {
             Hub.getInstance(cordova.getContext()).activateApiKey(key);
             callbackContext.success();
         } catch (Exception e) {
-            Timber.tag(TAG).e(e, "Error activating Blancco SDK");
+            Log.e(TAG, "Error activating Blancco SDK", e);
             callbackContext.error(e.getMessage());
         }
     }
 
     @CordovaMethod(WORKER)
     public void runSequence(final CordovaArgs args, final CallbackContext callbackContext) {
-        Timber.tag(TAG).d("Running Blancco SDK sequence");
+        Log.d(TAG,"Running Blancco SDK sequence");
         cordova.getThreadPool().execute(new Runnable() {
             public void run() {
                 try {
@@ -60,7 +63,7 @@ public class BlanccoSDKPlugin extends ReflectiveCordovaPlugin {
                     }
                     callbackContext.success();
                 } catch (Exception e) {
-                    Timber.tag(TAG).e(e, "Error activating Blancco SDK");
+                    Log.e(TAG, "Error activating Blancco SDK", e);
                     callbackContext.error(e.getMessage());
                 }
             }
