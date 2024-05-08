@@ -41,3 +41,6 @@ jspm_packages
 
 #
 .gradle
+
+*.xcframework
+*.aar

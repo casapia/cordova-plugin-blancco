@@ -17,10 +17,30 @@
     <!-- <dependency id="cordova-custom-config"
         url="https://github.com/dpa99c/cordova-custom-config" /> -->
 
+    <platform name="ios">
+        <js-module src="www/BlanccoSDK.js" name="BlanccoSDKPlugin">
+            <merges target="cordova.plugins.blanccosdk" />
+        </js-module>
+
+        <dependency id="cordova-plugin-add-swift-support" version="2.0.2" />
+        
+        <config-file target="config.xml" parent="/*">
+            <feature name="BlanccoSDKPlugin">
+                <param name="ios-package"
+                    value="BlanccoSDKPlugin" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/BlanccoSDKPlugin.h" />
+        <source-file src="src/ios/BlanccoSDKPlugin.m" />
+        <framework src="libs/BlanccoISDK.xcframework" embed="true" custom="true" />
+    </platform>
+
     <platform name="android">
-        <!-- <custom-preference name="android-manifest/application/activity/@android:exported" value="true" />
+        <!-- <custom-preference name="android-manifest/application/activity/@android:exported"
+        value="true" />
         <custom-preference name="android-manifest/application/@android:allowBackup" value="true" /> -->
-        <!-- <custom-preference name="android-manifest/application/@tools:replace" value="android:allowBackup" /> -->
+        <!-- <custom-preference name="android-manifest/application/@tools:replace"
+        value="android:allowBackup" /> -->
         <!-- <hook type="after_prepare" src="hooks/after_prepare.js" /> -->
         <js-module src="www/BlanccoSDK.js" name="BlanccoSDKPlugin">
             <merges target="cordova.plugins.blanccosdk" />
